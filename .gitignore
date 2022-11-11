@@ -3,4 +3,4 @@
 /coverage/target/
 /server-side/target/
 /target/
-/user-side/target/
+.idea/
