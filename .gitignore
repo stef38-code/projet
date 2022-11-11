@@ -3,4 +3,5 @@
 /coverage/target/
 /server-side/target/
 /target/
-.idea/
+.idea/*
+/user-side/target/*
