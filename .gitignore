@@ -3,5 +3,6 @@
 /coverage/target/
 /server-side/target/
 /target/
-.idea/*
+.idea/*.xml
 /user-side/target/*
+.idea/sonarlint/
