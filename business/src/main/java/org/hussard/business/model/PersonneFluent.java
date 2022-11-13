@@ -4,13 +4,23 @@ import java.time.LocalDate;
 
 public interface PersonneFluent {
     Prenom nom(String nom);
-    interface Prenom{
+
+    interface Prenom {
         Dnaiss prenom(String prenom);
     }
-    interface Dnaiss{
-        Create dnaiss(LocalDate dnaiss);
+
+    interface Dnaiss {
+        NumSS dnaiss(LocalDate dnaiss);
+
     }
-    interface Create{
+
+    interface Create {
         Personne create();
+    }
+
+    interface NumSS {
+        Create numSS(String numSS);
+
+        Create notNumSS();
     }
 }

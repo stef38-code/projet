@@ -6,11 +6,17 @@ public class Personne {
     private final String nom;
     private final String prenom;
     private final LocalDate dnaiss;
+    private final String numSS;
 
-    Personne(String nom, String prenom, LocalDate dnaiss) {
+    Personne(String nom, String prenom, LocalDate dnaiss, String numSS) {
         this.nom = nom;
         this.prenom = prenom;
         this.dnaiss = dnaiss;
+        this.numSS = numSS;
+    }
+
+    public static PersonneFluent aNew() {
+        return new PersonneCreate();
     }
 
     public String getNom() {
@@ -25,7 +31,7 @@ public class Personne {
         return dnaiss;
     }
 
-    public static PersonneFluent aNew() {
-        return new PersonneCreate();
+    public String getNumSS() {
+        return numSS;
     }
 }
