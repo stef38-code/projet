@@ -1,4 +1,4 @@
-package org.hussard.business.tools;
+package org.hussard.business.tools.nss;
 
 /**
  * <strong>Composition du NIR (numéro d'inscription au répertoire) communément appelé numéro de sécurité sociale ou numéro INSEE</strong>
@@ -9,7 +9,7 @@ package org.hussard.business.tools;
  * 				<th>Valeurs possibles</th>
  * 			</tr>
  * <!-- Pour les français -->
- *
+ * <p>
  * 			<tr style="background-color:#DDDDDD;">
  * 				<th colspan="3">Pour les francais</th>
  * 			</tr>
@@ -94,16 +94,9 @@ package org.hussard.business.tools;
  * 				<td>De <strong>01 à 97</strong> : 97 - modulo97(13 premiers chiffres du NIR)</td>
  * 			</tr>
  * 		</table>
- *
- * 		<strong>Problème des lettres dans le NIR</strong>
- * 		<p style="margin: 5px 20px 10px;">
- * 			Pour le calcul de la clé de contrôle, le numéro du département 2A (Corse-du-Sud) est remplacé par 19 et celui du 2B (Haute-Corse) par 18.
- * 		</p>
  */
-public class NumeroSecuSocial {
-    public boolean isValide(String nss) {
-        return nss.replace(" ", "").length() == 15;
+public class NumeroSecuSocialParseur {
+    public void adefinir(){
+        //todo
     }
-
-
 }
