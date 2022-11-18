@@ -1,4 +1,4 @@
-package org.hussard.business.tools;
+package org.hussard.business.tools.nss;
 
 /**
  * <strong>Composition du NIR (numéro d'inscription au répertoire) communément appelé numéro de sécurité sociale ou numéro INSEE</strong>
@@ -9,7 +9,7 @@ package org.hussard.business.tools;
  * 				<th>Valeurs possibles</th>
  * 			</tr>
  * <!-- Pour les français -->
- *
+ * <p>
  * 			<tr style="background-color:#DDDDDD;">
  * 				<th colspan="3">Pour les francais</th>
  * 			</tr>
@@ -100,10 +100,42 @@ package org.hussard.business.tools;
  * 			Pour le calcul de la clé de contrôle, le numéro du département 2A (Corse-du-Sud) est remplacé par 19 et celui du 2B (Haute-Corse) par 18.
  * 		</p>
  */
-public class NumeroSecuSocial {
-    public boolean isValide(String nss) {
-        return nss.replace(" ", "").length() == 15;
+public class NumeroSecuSocial extends NumeroSecuSocialCorse{
+    /**
+     * Check size equal 15
+     * @param nss numéro de sécurité social
+     * @return true si ok
+     */
+    public boolean isSize(String nss) {
+        return cleanNss(nss).length() == 15;
     }
 
 
+    /**
+     * Is valide key boolean.
+     *
+     * @param nss the nss
+     * @return the boolean
+     */
+    public boolean isValideKey(String nss) {
+        if(! isSize(nss)){
+            return false;
+        }
+        String cleanNss = cleanNss(nss);
+
+        return (97 - (nssNumber(cleanNss) % 97)) == keyNumber(cleanNss);
+    }
+
+    private String cleanNss(String nss){
+        String cleanNss =  nss.replace(" ", "");
+        return casCorse(cleanNss);
+    }
+    private long nssNumber(String nss){
+        String value = nss.substring(0,13);
+        return Long.parseLong(value);
+    }
+    private long keyNumber(String nss){
+        String key = nss.substring(13);
+        return Long.parseLong(key);
+    }
 }
