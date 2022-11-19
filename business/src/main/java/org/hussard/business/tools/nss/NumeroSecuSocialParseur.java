@@ -96,7 +96,15 @@ package org.hussard.business.tools.nss;
  * 		</table>
  */
 public class NumeroSecuSocialParseur {
-    public void adefinir(){
+    public void analyse() {
         //todo
+    }
+
+    public String extractSexe(String nir) {
+        if (nir.matches("^([^1-4|78])(.*)$")) {
+            throw new NumeroSecuSocialException("Code Sexe non valide !!");
+        }
+
+        return nir.substring(0, 1);
     }
 }
