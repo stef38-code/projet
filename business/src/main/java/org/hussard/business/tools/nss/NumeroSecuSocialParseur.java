@@ -1,5 +1,9 @@
 package org.hussard.business.tools.nss;
 
+import org.hussard.business.model.NirInformations;
+import org.hussard.business.tools.nss.lieu.Factory;
+import org.hussard.business.tools.nss.lieu.LieuNaissance;
+
 /**
  * <strong>Composition du NIR (numéro d'inscription au répertoire) communément appelé numéro de sécurité sociale ou numéro INSEE</strong>
  * 		<table>
@@ -95,16 +99,42 @@ package org.hussard.business.tools.nss;
  * 			</tr>
  * 		</table>
  */
-public class NumeroSecuSocialParseur {
-    public void analyse() {
-        //todo
-    }
-
-    public String extractSexe(String nir) {
-        if (nir.matches("^([^1-4|78])(.*)$")) {
-            throw new NumeroSecuSocialException("Code Sexe non valide !!");
+public class NumeroSecuSocialParseur extends NumeroSecuSocial {
+    public NirInformations parse(String nir) {
+        if (!isValidate(nir)) {
+            throw new NumeroSecuSocialException("Numéro de sécurité social(nir) non valide !!");
         }
+        LieuNaissance lieu = Factory.getLieu(nir);
+        return NirInformations.aNew()
+                .sexe(getSexe(nir))
+                .anneeNaiss(getAnneeNaiss(nir))
+                .moisNais(getMoisNaiss(nir))
+                .departementNaiss(lieu.getCode())
+                .numCommuneNaiss(lieu.getNumero())
+                .numOrdreNaiss(getNomOrdreNaissance(nir))
+                .cleCtrNir(getCle(nir))
+                .create();
 
-        return nir.substring(0, 1);
     }
+
+    private String getCle(String nir) {
+        return null;
+    }
+
+    private String getNomOrdreNaissance(String nir) {
+        return null;
+    }
+
+    private String getMoisNaiss(String nir) {
+        return null;
+    }
+
+    private String getAnneeNaiss(String nir) {
+        return null;
+    }
+
+    private String getSexe(String nir) {
+        return null;
+    }
+
 }
