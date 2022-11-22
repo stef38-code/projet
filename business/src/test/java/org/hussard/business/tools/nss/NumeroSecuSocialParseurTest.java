@@ -17,7 +17,7 @@ import java.util.stream.Stream;
  */
 class NumeroSecuSocialParseurTest {
     /**
-     * Arguments.of("105042601414554", "2005"),
+     * Arguments.of("104052601414554", "2005"),
      * Arguments.of("286129147102722", "1986"),
      * Arguments.of("302021455505061", "2002"),
      * Arguments.of("455021455505041", "1955"),
@@ -40,29 +40,29 @@ class NumeroSecuSocialParseurTest {
     private static Stream<Arguments> nirValide() {
         return Stream.of(
                 Arguments.of("1 05 01 26 014 145 06", "1", "2005", "01", "26", "014", "145", "06"),
-                Arguments.of("105012601414506", "1", "05", "01", "26", "014", "145", "06")
+                Arguments.of("105012601414506", "1", "2005", "01", "26", "014", "145", "06")
         );
     }
 
     private static Stream<Arguments> nirNonValide() {
         return Stream.of(
-                Arguments.of("505042601414548"),
-                Arguments.of("686129147102795"),
-                Arguments.of("905042601414542"),
-                Arguments.of("005042601414507")
+                Arguments.of("505042601414548", "Code Sexe non valide !!"),
+                Arguments.of("686129147102795", "Numéro de sécurité social(nir) non valide !!"),
+                Arguments.of("905042601414542", "Code Sexe non valide !!"),
+                Arguments.of("005042601414507", "Code Sexe non valide !!")
         );
     }
 
     @ParameterizedTest
     @MethodSource("nirValide")
-    void extractMoisNaiss_Quand_NirValide_Attend_MoisNaiss(String nir,
-                                                           String sexe,
-                                                           String annee,
-                                                           String mois,
-                                                           String dep,
-                                                           String numComm,
-                                                           String numOrdre,
-                                                           String cle) {
+    void parse_Quand_NirValide_Attend_NirInformations(String nir,
+                                                      String sexe,
+                                                      String annee,
+                                                      String mois,
+                                                      String dep,
+                                                      String numComm,
+                                                      String numOrdre,
+                                                      String cle) {
         NumeroSecuSocialParseur parseur = new NumeroSecuSocialParseur();
         NirInformations parse = parseur.parse(nir);
 
@@ -79,13 +79,13 @@ class NumeroSecuSocialParseurTest {
         softly.assertAll();
     }
 
-    @ParameterizedTest
+    @ParameterizedTest()
     @MethodSource("nirNonValide")
-    void extractSexe_Quand_NirNonValide_Attend_Exception(String nir) {
+    void parse_Quand_NirNonValide_Attend_Exception(String nir, String msgException) {
         NumeroSecuSocialParseur parseur = new NumeroSecuSocialParseur();
         Assertions.assertThatThrownBy(() -> parseur.parse(nir))
                 .isInstanceOf(NumeroSecuSocialException.class)
-                .hasMessage("Code Sexe non valide !!");
+                .hasMessage(msgException);
     }
 
 }

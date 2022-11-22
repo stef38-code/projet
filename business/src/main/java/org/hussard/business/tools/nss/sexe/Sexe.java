@@ -4,7 +4,7 @@ import org.hussard.business.tools.nss.NumeroSecuSocialException;
 
 public class Sexe {
     public static String get(String nir) {
-        if (nir.matches("^([^1-4|78])(.*)$")) {
+        if (nir.matches("^([^1-4|7-8])(.*)$")) {
             throw new NumeroSecuSocialException("Code Sexe non valide !!");
         }
         return nir.substring(0, 1);

@@ -7,6 +7,10 @@ public abstract class LieuNaissance {
         this.nir = nir;
     }
 
+    public String getNir() {
+        return nir;
+    }
+
     public abstract String getCode();
 
     public abstract String getNumero();
