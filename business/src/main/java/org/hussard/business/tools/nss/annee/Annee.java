@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Annee {
-    public String get(String nir) {
+    public static String get(String nir) {
         String annee = nir.substring(1, 3);
 
         String century = getCentury();
@@ -15,11 +15,11 @@ public class Annee {
         return century.concat(annee);
     }
 
-    private String getYear() {
+    private static String getYear() {
         return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy")).substring(2);
     }
 
-    private String getCentury() {
+    private static String getCentury() {
         return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy")).substring(0, 2);
     }
 }

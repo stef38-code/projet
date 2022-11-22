@@ -1,8 +1,13 @@
 package org.hussard.business.tools.nss;
 
 import org.hussard.business.model.NirInformations;
+import org.hussard.business.tools.nss.annee.Annee;
+import org.hussard.business.tools.nss.cle.Cle;
 import org.hussard.business.tools.nss.lieu.Factory;
 import org.hussard.business.tools.nss.lieu.LieuNaissance;
+import org.hussard.business.tools.nss.mois.Mois;
+import org.hussard.business.tools.nss.ordre.Ordre;
+import org.hussard.business.tools.nss.sexe.Sexe;
 
 /**
  * <strong>Composition du NIR (numéro d'inscription au répertoire) communément appelé numéro de sécurité sociale ou numéro INSEE</strong>
@@ -104,37 +109,38 @@ public class NumeroSecuSocialParseur extends NumeroSecuSocial {
         if (!isValidate(nir)) {
             throw new NumeroSecuSocialException("Numéro de sécurité social(nir) non valide !!");
         }
-        LieuNaissance lieu = Factory.getLieu(nir);
+        String cleanNir= cleanNss(nir);
+        LieuNaissance lieu = Factory.getLieu(cleanNir);
         return NirInformations.aNew()
-                .sexe(getSexe(nir))
-                .anneeNaiss(getAnneeNaiss(nir))
-                .moisNais(getMoisNaiss(nir))
+                .sexe(getSexe(cleanNir))
+                .anneeNaiss(getAnneeNaiss(cleanNir))
+                .moisNais(getMoisNaiss(cleanNir))
                 .departementNaiss(lieu.getCode())
                 .numCommuneNaiss(lieu.getNumero())
-                .numOrdreNaiss(getNomOrdreNaissance(nir))
-                .cleCtrNir(getCle(nir))
+                .numOrdreNaiss(getNomOrdreNaissance(cleanNir))
+                .cleCtrNir(getCle(cleanNir))
                 .create();
 
     }
 
     private String getCle(String nir) {
-        return null;
+        return Cle.get(nir);
     }
 
     private String getNomOrdreNaissance(String nir) {
-        return null;
+        return Ordre.get(nir);
     }
 
     private String getMoisNaiss(String nir) {
-        return null;
+        return Mois.get(nir);
     }
 
     private String getAnneeNaiss(String nir) {
-        return null;
+        return Annee.get(nir);
     }
 
     private String getSexe(String nir) {
-        return null;
+        return Sexe.get(nir);
     }
 
 }
