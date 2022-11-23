@@ -40,7 +40,11 @@ class NumeroSecuSocialParseurTest {
     private static Stream<Arguments> nirValide() {
         return Stream.of(
                 Arguments.of("1 05 01 26 014 145 06", "1", "2005", "01", "26", "014", "145", "06"),
-                Arguments.of("105012601414506", "1", "2005", "01", "26", "014", "145", "06")
+                Arguments.of("105012601414506", "1", "2005", "01", "26", "014", "145", "06"),
+                Arguments.of("105202601414519", "1", "2005", "20", "26", "014", "145", "19"),//Mois 20
+                Arguments.of("105422601414580", "1", "2005", "42", "26", "014", "145", "80"),//Mois 42
+                Arguments.of("105502601414514", "1", "2005", "50", "26", "014", "145", "14"),//Mois 50
+                Arguments.of("105992601414522", "1", "2005", "99", "26", "014", "145", "22") //Mois 99
         );
     }
 
@@ -48,6 +52,7 @@ class NumeroSecuSocialParseurTest {
         return Stream.of(
                 Arguments.of("505042601414548", "Code Sexe non valide !!"),
                 Arguments.of("686129147102795", "Numéro de sécurité social(nir) non valide !!"),
+                Arguments.of("186159147102723", "Mois de naissance non conforme !!"),
                 Arguments.of("905042601414542", "Code Sexe non valide !!"),
                 Arguments.of("005042601414507", "Code Sexe non valide !!")
         );

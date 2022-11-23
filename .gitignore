@@ -6,3 +6,5 @@
 .idea/*.xml
 /user-side/target/*
 .idea/sonarlint/
+/business/.attach_*
+
