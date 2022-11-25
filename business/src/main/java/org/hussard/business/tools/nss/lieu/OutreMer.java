@@ -7,11 +7,11 @@ public class OutreMer extends LieuNaissance {
 
     @Override
     public String getCode() {
-        return null;
+        return getNir().substring(5, 8);
     }
 
     @Override
     public String getNumero() {
-        return null;
+        return getNir().substring(8, 10);
     }
 }

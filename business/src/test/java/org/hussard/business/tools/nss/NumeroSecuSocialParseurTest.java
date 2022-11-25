@@ -37,7 +37,7 @@ class NumeroSecuSocialParseurTest {
      * Arguments.of("840015145550272", "01")
      * );
      */
-    private static Stream<Arguments> nirValide() {
+    private static Stream<Arguments> nirValideMetropole() {
         return Stream.of(
                 Arguments.of("1 05 01 26 014 145 06", "1", "2005", "01", "26", "014", "145", "06"),
                 Arguments.of("105012601414506", "1", "2005", "01", "26", "014", "145", "06"),
@@ -47,7 +47,24 @@ class NumeroSecuSocialParseurTest {
                 Arguments.of("105992601414522", "1", "2005", "99", "26", "014", "145", "22") //Mois 99
         );
     }
-
+    private static Stream<Arguments> nirValideOutreMer() {
+        return Stream.of(
+                Arguments.of("1 05 01 97 014 145 29", "1", "2005", "01", "970", "14", "145", "29"),
+                Arguments.of("1 05 20 98 914 145 78", "1", "2005", "20", "989", "14", "145", "78"),
+                Arguments.of("1 05 42 97 523 145 62", "1", "2005", "42", "975", "23", "145", "62"),
+                Arguments.of("1 05 50 98 099 145 79", "1", "2005", "50", "980", "99", "145", "79"),
+                Arguments.of("1 05 99 98 258 518 85", "1", "2005", "99", "982", "58", "518", "85")
+        );
+    }
+    private static Stream<Arguments> nirValideHorsFrance() {
+        return Stream.of(
+                Arguments.of("1 05 01 99 014 145 72", "1", "2005", "01", "99", "014", "145", "72"),
+                Arguments.of("1 05 20 99 914 145 51", "1", "2005", "20", "99", "914", "145", "51"),
+                Arguments.of("1 05 42 99 523 145 08", "1", "2005", "42", "99", "523", "145", "08"),
+                Arguments.of("1 05 50 99 099 145 52", "1", "2005", "50", "99", "099", "145", "52"),
+                Arguments.of("1 05 99 99 258 518 58", "1", "2005", "99", "99", "258", "518", "58")
+        );
+    }
     private static Stream<Arguments> nirNonValide() {
         return Stream.of(
                 Arguments.of("505042601414548", "Code Sexe non valide !!"),
@@ -57,10 +74,24 @@ class NumeroSecuSocialParseurTest {
                 Arguments.of("005042601414507", "Code Sexe non valide !!")
         );
     }
-
     @ParameterizedTest
-    @MethodSource("nirValide")
-    void parse_Quand_NirValide_Attend_NirInformations(String nir,
+    @MethodSource("nirValideHorsFrance")
+    void parse_Quand_NirValideHorsFrance_Attend_NirInformations(String nir,
+                                                               String sexe,
+                                                               String annee,
+                                                               String mois,
+                                                               String dep,
+                                                               String numComm,
+                                                               String numOrdre,
+                                                               String cle) {
+        NumeroSecuSocialParseur parseur = new NumeroSecuSocialParseur();
+        NirInformations parse = parseur.parse(nir);
+
+        assertNirInfotmations(sexe, annee, mois, dep, numComm, numOrdre, cle, parse);
+    }
+    @ParameterizedTest
+    @MethodSource("nirValideMetropole")
+    void parse_Quand_NirValideMetropole_Attend_NirInformations(String nir,
                                                       String sexe,
                                                       String annee,
                                                       String mois,
@@ -71,6 +102,24 @@ class NumeroSecuSocialParseurTest {
         NumeroSecuSocialParseur parseur = new NumeroSecuSocialParseur();
         NirInformations parse = parseur.parse(nir);
 
+        assertNirInfotmations(sexe, annee, mois, dep, numComm, numOrdre, cle, parse);
+    }
+    @ParameterizedTest
+    @MethodSource("nirValideOutreMer")
+    void parse_Quand_NirValideOutreMer_Attend_NirInformations(String nir,
+                                                               String sexe,
+                                                               String annee,
+                                                               String mois,
+                                                               String dep,
+                                                               String numComm,
+                                                               String numOrdre,
+                                                               String cle) {
+        NumeroSecuSocialParseur parseur = new NumeroSecuSocialParseur();
+        NirInformations parse = parseur.parse(nir);
+
+        assertNirInfotmations(sexe, annee, mois, dep, numComm, numOrdre, cle, parse);
+    }
+    private static void assertNirInfotmations(String sexe, String annee, String mois, String dep, String numComm, String numOrdre, String cle, NirInformations parse) {
         SoftAssertions softly = new SoftAssertions();
 
         softly.assertThat(parse.getSexe()).isEqualTo(sexe);

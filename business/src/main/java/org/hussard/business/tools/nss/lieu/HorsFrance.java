@@ -7,11 +7,11 @@ public class HorsFrance extends LieuNaissance {
 
     @Override
     public String getCode() {
-        return null;
+        return getNir().substring(5, 7);
     }
 
     @Override
     public String getNumero() {
-        return null;
+        return getNir().substring(7, 10);
     }
 }
