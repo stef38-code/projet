@@ -1,6 +1,8 @@
-package org.hussard.business.tools.nss.mois;
+package org.hussard.business.tools.nss.elements.mois;
 
 import org.hussard.business.tools.nss.NumeroSecuSocialException;
+import org.hussard.business.tools.nss.NumeroSecuSocialTools;
+import org.hussard.business.tools.nss.elements.Element;
 
 /**
  * 4 et 5 	mois de naissance
@@ -15,18 +17,7 @@ import org.hussard.business.tools.nss.NumeroSecuSocialException;
  * caractérisent le NIR d'une personne inscrite sur la base d'une pièce d'état civil incomplète,
  * mais mentionnant toutefois un mois de naissance.
  */
-public class Mois {
-    private Mois() {
-        throw new UnsupportedOperationException("Mois is a utility class and cannot be instantiated");
-    }
-
-    public static String get(String nir) {
-        String mois = nir.substring(3, 5);
-        if (isMonthValidated(mois)) {
-            return mois;
-        }
-        throw new NumeroSecuSocialException("Mois de naissance non conforme !!");
-    }
+public class Mois implements Element {
 
     private static boolean isMonthValidated(String mois) {
         int month = Integer.parseInt(mois);
@@ -35,5 +26,14 @@ public class Mois {
 
     private static boolean critere(int mois, int debut, int fin) {
         return (mois >= debut && mois <= fin);
+    }
+
+    @Override
+    public String value(String nir) {
+         String mois =  NumeroSecuSocialTools.cleanNss(nir).substring(3, 5);
+        if (isMonthValidated(mois)) {
+            return mois;
+        }
+        throw new NumeroSecuSocialException("Mois de naissance non conforme !!");
     }
 }

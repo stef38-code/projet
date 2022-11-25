@@ -40,6 +40,8 @@ class NumeroSecuSocialParseurTest {
     private static Stream<Arguments> nirValideMetropole() {
         return Stream.of(
                 Arguments.of("1 05 01 26 014 145 06", "1", "2005", "01", "26", "014", "145", "06"),
+                Arguments.of("1 05 01 2B 014 145 28", "1", "2005", "01", "2B", "014", "145", "28"),
+                Arguments.of("1 05 01 2A 014 145 01", "1", "2005", "01", "2A", "014", "145", "01"),
                 Arguments.of("105012601414506", "1", "2005", "01", "26", "014", "145", "06"),
                 Arguments.of("105202601414519", "1", "2005", "20", "26", "014", "145", "19"),//Mois 20
                 Arguments.of("105422601414580", "1", "2005", "42", "26", "014", "145", "80"),//Mois 42
@@ -84,7 +86,7 @@ class NumeroSecuSocialParseurTest {
                                                                String numComm,
                                                                String numOrdre,
                                                                String cle) {
-        NumeroSecuSocialParseur parseur = new NumeroSecuSocialParseur();
+        NumeroSecuSocial parseur = new NumeroSecuSocial();
         NirInformations parse = parseur.parse(nir);
 
         assertNirInfotmations(sexe, annee, mois, dep, numComm, numOrdre, cle, parse);
@@ -99,7 +101,7 @@ class NumeroSecuSocialParseurTest {
                                                       String numComm,
                                                       String numOrdre,
                                                       String cle) {
-        NumeroSecuSocialParseur parseur = new NumeroSecuSocialParseur();
+        NumeroSecuSocial parseur = new NumeroSecuSocial();
         NirInformations parse = parseur.parse(nir);
 
         assertNirInfotmations(sexe, annee, mois, dep, numComm, numOrdre, cle, parse);
@@ -114,7 +116,7 @@ class NumeroSecuSocialParseurTest {
                                                                String numComm,
                                                                String numOrdre,
                                                                String cle) {
-        NumeroSecuSocialParseur parseur = new NumeroSecuSocialParseur();
+        NumeroSecuSocial parseur = new NumeroSecuSocial();
         NirInformations parse = parseur.parse(nir);
 
         assertNirInfotmations(sexe, annee, mois, dep, numComm, numOrdre, cle, parse);
@@ -136,7 +138,7 @@ class NumeroSecuSocialParseurTest {
     @ParameterizedTest()
     @MethodSource("nirNonValide")
     void parse_Quand_NirNonValide_Attend_Exception(String nir, String msgException) {
-        NumeroSecuSocialParseur parseur = new NumeroSecuSocialParseur();
+        NumeroSecuSocial parseur = new NumeroSecuSocial();
         Assertions.assertThatThrownBy(() -> parseur.parse(nir))
                 .isInstanceOf(NumeroSecuSocialException.class)
                 .hasMessage(msgException);

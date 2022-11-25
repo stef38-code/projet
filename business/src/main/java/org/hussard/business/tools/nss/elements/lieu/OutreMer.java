@@ -1,4 +1,4 @@
-package org.hussard.business.tools.nss.lieu;
+package org.hussard.business.tools.nss.elements.lieu;
 
 public class OutreMer extends LieuNaissance {
     public OutreMer(String nir) {

@@ -1,4 +1,6 @@
-package org.hussard.business.tools.nss.lieu;
+package org.hussard.business.tools.nss.elements.lieu;
+
+import org.hussard.business.tools.nss.NumeroSecuSocialTools;
 
 public abstract class LieuNaissance {
     private final String nir;
@@ -8,7 +10,7 @@ public abstract class LieuNaissance {
     }
 
     public String getNir() {
-        return nir;
+        return NumeroSecuSocialTools.cleanNss(nir);
     }
 
     public abstract String getCode();

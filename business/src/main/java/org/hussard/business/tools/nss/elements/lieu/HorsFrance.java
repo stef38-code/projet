@@ -1,7 +1,7 @@
-package org.hussard.business.tools.nss.lieu;
+package org.hussard.business.tools.nss.elements.lieu;
 
-public class Metropole extends LieuNaissance {
-    public Metropole(String nir) {
+public class HorsFrance extends LieuNaissance {
+    public HorsFrance(String nir) {
         super(nir);
     }
 

@@ -7,6 +7,9 @@ import java.util.regex.Pattern;
  * The type Numero secu social corse.
  */
 class NumeroSecuSocialCorse {
+    NumeroSecuSocialCorse() {
+        throw new UnsupportedOperationException("NumeroSecuSocialCorse is a utility class and cannot be instantiated");
+    }
     /**
      * Correction corse string.
      *
@@ -15,7 +18,7 @@ class NumeroSecuSocialCorse {
      * @param value     the value
      * @return string si la chaîne contient les codes Corse
      */
-    private String correctionCorse(String cleanNss, String codeCorse, String value) {
+    private static String correctionCorse(String cleanNss, String codeCorse, String value) {
         Pattern pattern = Pattern.compile("((.*)(" + codeCorse + ")(.*))");
         Matcher matcher = pattern.matcher(cleanNss);
         if(matcher.matches()) {
@@ -30,7 +33,7 @@ class NumeroSecuSocialCorse {
      * @param nss the nss
      * @return the string
      */
-    protected String casCorse(String nss){
+    protected static String casCorse(String nss){
         //2A (Corse-du-Sud) est remplacé par 19
         String corrigeNss = correctionCorse(nss, "2A", "19");
         //2B (Haute-Corse) est remplacé par 18
