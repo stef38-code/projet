@@ -8,8 +8,9 @@ import java.util.regex.Pattern;
  */
 class NumeroSecuSocialCorse {
     NumeroSecuSocialCorse() {
-        throw new UnsupportedOperationException("NumeroSecuSocialCorse is a utility class and cannot be instantiated");
+        throw new UnsupportedOperationException("Utility class and cannot be instantiated");
     }
+
     /**
      * Correction corse string.
      *
@@ -21,7 +22,7 @@ class NumeroSecuSocialCorse {
     private static String correctionCorse(String cleanNss, String codeCorse, String value) {
         Pattern pattern = Pattern.compile("((.*)(" + codeCorse + ")(.*))");
         Matcher matcher = pattern.matcher(cleanNss);
-        if(matcher.matches()) {
+        if (matcher.matches()) {
             return matcher.replaceAll("$2" + value + "$4");
         }
         return cleanNss;
@@ -33,7 +34,7 @@ class NumeroSecuSocialCorse {
      * @param nss the nss
      * @return the string
      */
-    protected static String casCorse(String nss){
+    protected static String casCorse(String nss) {
         //2A (Corse-du-Sud) est remplacé par 19
         String corrigeNss = correctionCorse(nss, "2A", "19");
         //2B (Haute-Corse) est remplacé par 18

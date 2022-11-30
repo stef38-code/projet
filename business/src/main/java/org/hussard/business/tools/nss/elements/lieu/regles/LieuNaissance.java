@@ -1,4 +1,4 @@
-package org.hussard.business.tools.nss.elements.lieu;
+package org.hussard.business.tools.nss.elements.lieu.regles;
 
 import org.hussard.business.tools.nss.NumeroSecuSocialTools;
 
@@ -9,7 +9,7 @@ public abstract class LieuNaissance {
         this.nir = nir;
     }
 
-    public String getNir() {
+    protected String getNir() {
         return NumeroSecuSocialTools.cleanNss(nir);
     }
 

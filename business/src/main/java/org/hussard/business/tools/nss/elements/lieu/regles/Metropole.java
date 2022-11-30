@@ -1,4 +1,4 @@
-package org.hussard.business.tools.nss.elements.lieu;
+package org.hussard.business.tools.nss.elements.lieu.regles;
 
 public class Metropole extends LieuNaissance {
     public Metropole(String nir) {
